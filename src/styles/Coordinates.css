@@ -1,0 +1,36 @@
+.coordinates {
+    margin: 0;
+}
+
+.coordinates__value {
+    position: relative;
+}
+
+.coordinates__map-icon {
+    position: absolute;
+    top: 0.75rem;
+    left: -1.75rem;
+    overflow: visible !important;
+}
+
+.coordinates__map-icon::before {
+    position: absolute;
+    top: -0.4rem;
+    left: 0.5rem;
+    width: 0.75rem;
+    height: 0.25rem;
+    border-top: 1px solid var(--mantine-color-blue-8);
+    border-left: 1px solid var(--mantine-color-blue-8);
+    content: " ";
+}
+
+.coordinates__map-icon::after {
+    position: absolute;
+    bottom: -0.4rem;
+    left: 0.5rem;
+    width: 0.75rem;
+    height: 0.25rem;
+    border-bottom: 1px solid var(--mantine-color-blue-8);
+    border-left: 1px solid var(--mantine-color-blue-8);
+    content: " ";
+}

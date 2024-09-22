@@ -1,0 +1,32 @@
+.sunset-panel {
+    position: fixed;
+    right: 1rem;
+    top: 0.75rem;
+    width: 20rem;
+    height: auto;
+    max-height: calc(100vh - 2rem);
+    overflow: hidden;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.sunset-panel__content {
+    overflow: auto;
+    min-height: 0;
+    flex: 1;
+}
+
+.sunset-panel__coordinates {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+@media (width <= 630px) {
+  .sunset-panel {
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    top: 4rem;
+    max-height: calc(100vh - 5rem);
+  }
+}
