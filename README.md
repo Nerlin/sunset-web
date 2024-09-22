@@ -6,7 +6,7 @@
 
 ## Install dependencies
 
-* `npm run install`
+* `npm install`
 
 ## Run in development mode
 
