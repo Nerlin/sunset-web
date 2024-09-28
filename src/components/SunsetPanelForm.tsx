@@ -45,7 +45,12 @@ export default function SunsetPanelForm({
   return (
     <form onSubmit={submit}>
       <Flex direction={"column"} style={style} gap={"md"}>
-        {latLng && <Coordinates latLng={latLng} />}
+        {latLng && (
+          <Coordinates
+            label={"Observation point coordinates:"}
+            latLng={latLng}
+          />
+        )}
 
         <DateInput
           label={<strong>Date:</strong>}

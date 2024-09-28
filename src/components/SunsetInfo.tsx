@@ -1,7 +1,9 @@
 import { Fieldset, Group, Stack, Text } from "@mantine/core";
 import dayjs from "dayjs";
 import { SunsetResult } from "../state/Sunset.ts";
+import { minutesToHours, whenShouldHappen } from "../util/date.ts";
 import Coordinates from "./Coordinates.tsx";
+import SunsetTime from "./SunsetTime.tsx";
 
 export interface SunsetInfoProps {
   data: SunsetResult;
@@ -14,22 +16,26 @@ export default function SunsetInfo({ data }: SunsetInfoProps) {
     <Fieldset legend={<strong>Results</strong>} mt={"md"}>
       <Stack gap={"md"}>
         <Stack gap={"xs"}>
-          <Text size={"sm"}>
-            The sunset{" "}
-            {dayjs().isBefore(actual)
-              ? "should happen"
-              : "should have happened"}{" "}
-            at <br />
-            {actual.format("YYYY-MM-DD HH:mm")} (GMT{actual.format("Z")}).
-          </Text>
+          <SunsetTime
+            date={actual}
+            label={"Accounting for topography, observable sunset:"}
+          />
+
+          <SunsetTime date={nominal} label={"Not accounting for topography:"} />
 
           <Text size={"sm"}>
-            {actual.isBefore(data.nominal) ? "Earlier" : "Later"} than nominally
-            (at {nominal.format("HH:mm")}).
+            Therefore, accounting for topography observable sunset{" "}
+            {whenShouldHappen(actual)}{" "}
+            <i>{minutesToHours(Math.abs(actual.diff(nominal, "minutes")))}</i>{" "}
+            {actual.isBefore(data.nominal) ? "earlier" : "later"} than
+            nominally.
           </Text>
         </Stack>
 
-        <Coordinates latLng={data.occlusion} />
+        <Coordinates
+          label={"Sun-topo occlusion coordinates:"}
+          latLng={data.occlusion}
+        />
 
         <Group gap={0}>
           <Text size={"sm"} fw={"bold"}>

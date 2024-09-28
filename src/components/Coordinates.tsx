@@ -2,7 +2,7 @@ import { ActionIcon, Text } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconMap } from "@tabler/icons-react";
 import { LatLngLiteral } from "leaflet";
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { useMap } from "react-leaflet";
 import { SunsetPanelContext, SunsetPanelMediaQuery } from "./SunsetPanel.tsx";
 
@@ -10,11 +10,13 @@ import "../styles/Coordinates.css";
 
 export interface CoordinatesProps {
   className?: string;
+  label?: ReactNode;
   latLng: LatLngLiteral;
 }
 
 export default function Coordinates({
   className = "coordinates",
+  label = "Coordinates:",
   latLng,
 }: CoordinatesProps) {
   const map = useMap();
@@ -32,7 +34,7 @@ export default function Coordinates({
     <dl className={className}>
       <dt>
         <Text size={"sm"} fw={600}>
-          Coordinates:
+          {label}
         </Text>
       </dt>
       <dd className={"coordinates__value"}>
@@ -47,7 +49,7 @@ export default function Coordinates({
         </ActionIcon>
 
         <Text size={"sm"}>
-          {latLng.lat}, <br /> {latLng.lng}
+          {latLng.lat.toFixed(6)}, <br /> {latLng.lng.toFixed(6)}
         </Text>
       </dd>
     </dl>
