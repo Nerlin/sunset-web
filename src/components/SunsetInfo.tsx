@@ -1,4 +1,4 @@
-import { Fieldset, Group, Stack, Text } from "@mantine/core";
+import { Fieldset, Stack, Text } from "@mantine/core";
 import dayjs from "dayjs";
 import { SunsetResult } from "../state/Sunset.ts";
 import { minutesToHours, whenShouldHappen } from "../util/date.ts";
@@ -37,7 +37,7 @@ export default function SunsetInfo({ data }: SunsetInfoProps) {
           latLng={data.occlusion}
         />
 
-        <Group gap={0}>
+        <Stack gap={0}>
           <Text size={"sm"} fw={"bold"}>
             Sun-topo occlusion height:
           </Text>
@@ -47,14 +47,14 @@ export default function SunsetInfo({ data }: SunsetInfoProps) {
             {Math.abs(data.occlusion.heightDifference)}m{" "}
             {data.occlusion.heightDifference >= 0 ? "above" : "below"} observer
           </Text>
-        </Group>
+        </Stack>
 
-        <Group gap={0}>
+        <Stack gap={0}>
           <Text size={"sm"} fw={"bold"}>
             Sun-topo occlusion distance from observer:
           </Text>
           <Text size={"sm"}>{data.occlusion.distance.toFixed(2)}m</Text>
-        </Group>
+        </Stack>
       </Stack>
     </Fieldset>
   );

@@ -10,8 +10,8 @@ const handlers = [
     return HttpResponse.json({
       occlusion_lat: 39.1670503731652,
       occlusion_long: 46.317377018935,
-      occlusion_height: 2880,
-      occlusion_height_difference: 1830,
+      occlusion_height: 990,
+      occlusion_height_difference: 30,
       occlusion_distance: 6328.27149151494,
       nominal_sunset: "2024-09-21 18:52:00",
       actual_sunset: "2024-09-21 17:24:00",
