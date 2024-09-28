@@ -8,6 +8,7 @@ import TileLayerControl, {
 } from "./components/TileLayerControl.tsx";
 
 import "./styles/App.css";
+import Watermark from "./components/Watermark.tsx";
 
 const defaultCenter: LatLngLiteral = { lat: 39.1833275, lng: 46.3877439 };
 
@@ -40,6 +41,7 @@ function App() {
       <TileLayerControl tileLayer={tileLayer} onChange={setTileLayer} />
 
       <ZoomControl position={"bottomleft"} />
+      <Watermark />
     </MapContainer>
   );
 }
