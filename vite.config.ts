@@ -14,7 +14,7 @@ export default defineConfig({
         name: "Sunset",
         short_name: "Sunset",
         description: "Check the sunset time",
-        theme_color: "#ffffff",
+        theme_color: "#db4d00",
         icons: [
           {
             src: "sun192x192.png",

@@ -18,9 +18,9 @@
     }
 
     to {
-        transform: translateY(38px);
+        transform: translateY(32px);
         filter: hue-rotate(335deg) drop-shadow(0 0 3px #db4d00) drop-shadow(0 0 5px #fdf5b4);
-        opacity: 0.65;
+        opacity: 0.85;
     }
 }
 
