@@ -1,7 +1,6 @@
 import { LatLngLiteral } from "leaflet";
 import { useState } from "react";
 import { MapContainer, TileLayer, ZoomControl } from "react-leaflet";
-import LocateControl from "./components/LocateControl.tsx";
 import MapContent from "./components/MapContent.tsx";
 import TileLayerControl, {
   TileLayerName,
@@ -36,7 +35,6 @@ function App() {
         />
       ) : null}
 
-      <LocateControl />
       <MapContent />
       <TileLayerControl tileLayer={tileLayer} onChange={setTileLayer} />
 

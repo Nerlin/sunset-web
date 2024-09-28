@@ -1,20 +1,31 @@
 import { ActionIcon } from "@mantine/core";
 import { IconCompass } from "@tabler/icons-react";
-import { useEffect } from "react";
-import { useMap } from "react-leaflet";
+import { LatLngLiteral } from "leaflet";
+import { useEffect, useRef } from "react";
 import Control from "react-leaflet-custom-control";
 import useGeolocation from "../hooks/useGeolocation.ts";
 
-export default function LocateControl() {
-  const map = useMap();
+export interface LocateControlProps {
+  onLocate(latLng: LatLngLiteral): void;
+}
 
-  const geolocation = useGeolocation({ timeout: 3000 });
+export default function LocateControl({ onLocate }: LocateControlProps) {
+  const geolocation = useGeolocation({
+    timeout: 3000,
+    enableHighAccuracy: true,
+  });
+
+  const onLocateRef = useRef(onLocate);
+  onLocateRef.current = onLocate;
 
   useEffect(() => {
     if (geolocation.latitude != null && geolocation.longitude != null) {
-      map.flyTo({ lat: geolocation.latitude, lng: geolocation.longitude });
+      onLocateRef.current({
+        lat: geolocation.latitude,
+        lng: geolocation.longitude,
+      });
     }
-  }, [map, geolocation]);
+  }, [geolocation]);
 
   return (
     <Control position={"bottomleft"}>

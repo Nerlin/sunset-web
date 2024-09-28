@@ -3,13 +3,15 @@ import { IconInfoCircle } from "@tabler/icons-react";
 import { useMutation } from "@tanstack/react-query";
 import L, { LatLngLiteral, LeafletMouseEvent } from "leaflet";
 import { useState } from "react";
-import { Marker, Tooltip, useMapEvent } from "react-leaflet";
+import { Marker, Tooltip, useMap, useMapEvent } from "react-leaflet";
 import { getSunset } from "../state/Sunset.ts";
+import LocateControl from "./LocateControl.tsx";
 import SunsetInfo from "./SunsetInfo.tsx";
 import SunsetPanel from "./SunsetPanel.tsx";
 import { SunsetPanelFormValues } from "./SunsetPanelForm.tsx";
 
 export default function MapContent() {
+  const map = useMap();
   const [latLng, setLatLng] = useState<LatLngLiteral | null>(null);
 
   const {
@@ -21,6 +23,11 @@ export default function MapContent() {
   } = useMutation({
     mutationFn: async (form: SunsetPanelFormValues) => getSunset(form),
   });
+
+  function locate(latLng: LatLngLiteral) {
+    map.flyTo(latLng);
+    setLatLng(latLng);
+  }
 
   function putMarker(event: LeafletMouseEvent) {
     setLatLng(event.latlng);
@@ -63,6 +70,8 @@ export default function MapContent() {
 
         {data && <SunsetInfo data={data} />}
       </SunsetPanel>
+
+      <LocateControl onLocate={locate} />
     </>
   );
 }

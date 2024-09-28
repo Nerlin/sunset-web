@@ -27,7 +27,7 @@ export default function TileLayerControl({
       <Select
         clearable={false}
         checkIconPosition={"right"}
-        comboboxProps={{ zIndex: 1000 }}
+        comboboxProps={{ zIndex: 1010 }}
         data={tiles}
         ref={ref}
         value={tileLayer}
