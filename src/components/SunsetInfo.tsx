@@ -7,9 +7,10 @@ import SunsetTime from "./SunsetTime.tsx";
 
 export interface SunsetInfoProps {
   data: SunsetResult;
+  sunrise?: boolean;
 }
 
-export default function SunsetInfo({ data }: SunsetInfoProps) {
+export default function SunsetInfo({ data, sunrise = false }: SunsetInfoProps) {
   const actual = dayjs(data.actual);
   const nominal = dayjs(data.nominal);
   return (
@@ -18,14 +19,19 @@ export default function SunsetInfo({ data }: SunsetInfoProps) {
         <Stack gap={"xs"}>
           <SunsetTime
             date={actual}
-            label={"Accounting for topography, observable sunset:"}
+            label={`Accounting for topography, observable ${sunrise ? "sunrise" : "sunset"}:`}
+            sunrise={sunrise}
           />
 
-          <SunsetTime date={nominal} label={"Not accounting for topography:"} />
+          <SunsetTime
+            date={nominal}
+            label={"Not accounting for topography:"}
+            sunrise={sunrise}
+          />
 
           <Text size={"sm"}>
-            Therefore, accounting for topography observable sunset{" "}
-            {whenShouldHappen(actual)}{" "}
+            Therefore, accounting for topography observable{" "}
+            {sunrise ? "sunrise" : "sunset"} {whenShouldHappen(actual)}{" "}
             <i>{minutesToHours(Math.abs(actual.diff(nominal, "minutes")))}</i>{" "}
             {actual.isBefore(data.nominal) ? "earlier" : "later"} than
             nominally.

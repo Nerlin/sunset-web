@@ -17,6 +17,18 @@ const handlers = [
       actual_sunset: "2024-09-21 17:24:00",
     });
   }),
+  http.get(`${backend}/gettime.sunrise/:lat/:lng`, async () => {
+    await delay();
+    return HttpResponse.json({
+      occlusion_lat: 39.1670503731652,
+      occlusion_long: 46.317377018935,
+      occlusion_height: 990,
+      occlusion_height_difference: 30,
+      occlusion_distance: 6328.27149151494,
+      nominal_sunrise: "2024-09-21 18:52:00",
+      actual_sunrise: "2024-09-21 17:24:00",
+    });
+  }),
 ];
 
 export const worker = setupWorker(...handlers);

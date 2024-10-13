@@ -1,13 +1,27 @@
 .sunset-panel-header {
   background: linear-gradient(180deg, #fb933d 0%, #db4d00 100%);
-  animation: 1.5s linear forwards sunset-background;
   overflow: hidden;
   flex: 0 0 32px;
 }
 
-.sunset-panel-header__sun {
-  animation: 1.5s linear forwards sunset;
+.sunset-panel-header_sunset {
+  animation: 1.5s linear forwards sunset-background;
+}
+
+.sunset-panel-header_sunrise {
+  animation: 1.5s linear forwards sunrise-background;
+}
+
+.sunset-panel-header-sun {
   margin: -32px auto 0;
+}
+
+.sunset-panel-header-sun.sunset-panel-header-sun_sunset {
+  animation: 1.5s linear forwards sunset;
+}
+
+.sunset-panel-header-sun.sunset-panel-header-sun_sunrise {
+  animation: 1.5s linear forwards sunrise;
 }
 
 @keyframes sunset {
@@ -24,12 +38,36 @@
     }
 }
 
+@keyframes sunrise {
+    from {
+        transform: translateY(32px);
+        filter: hue-rotate(335deg) drop-shadow(0 0 3px #db4d00) drop-shadow(0 0 5px #fdf5b4);
+        opacity: 0.85;
+    }
+
+    to {
+        transform: translateY(0);
+        filter: hue-rotate(360deg) drop-shadow(0 0 4px #fdf5b4) drop-shadow(0 0 14px #fff6c7);
+        opacity: 1;
+    }
+}
+
 @keyframes sunset-background {
   from {
-    opacity: 0.5;
+    filter: brightness(110%);
   }
 
   to {
-    opacity: 1;
+    filter: brightness(100%);
+  }
+}
+
+@keyframes sunrise-background {
+  from {
+    filter: brightness(100%);
+  }
+
+  to {
+    filter: brightness(110%);
   }
 }

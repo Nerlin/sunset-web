@@ -1,5 +1,4 @@
 import { Paper, Stack, Transition } from "@mantine/core";
-import { LatLngLiteral } from "leaflet";
 import {
   createContext,
   ReactNode,
@@ -10,19 +9,15 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import useLeafletCustomControl from "../hooks/useLeafletCustomControl.ts";
-import SunsetPanelForm, { SunsetPanelFormValues } from "./SunsetPanelForm.tsx";
 import SunsetPanelHeader from "./SunsetPanelHeader.tsx";
 
 import "../styles/SunsetPanel.css";
 
 export interface SunsetPanelProps {
   children?: ReactNode;
-  latLng: LatLngLiteral | null;
-  loading?: boolean;
   opened: boolean;
-
+  sunrise?: boolean;
   onClose(): void;
-  onSubmit(data: SunsetPanelFormValues): void;
 }
 
 export interface SunsetPanelContextData {
@@ -37,11 +32,9 @@ export const SunsetPanelContext = createContext<SunsetPanelContextData>({
 
 export default function SunsetPanel({
   children,
-  latLng,
-  loading,
   opened,
+  sunrise = false,
   onClose,
-  onSubmit,
 }: SunsetPanelProps) {
   const [minimized, setMinimized] = useState(false);
   useEffect(() => {
@@ -79,6 +72,7 @@ export default function SunsetPanel({
           >
             <SunsetPanelHeader
               minimized={minimized}
+              sunrise={sunrise}
               onClose={close}
               onToggle={toggle}
             />
@@ -86,17 +80,7 @@ export default function SunsetPanel({
             {opened && (
               <Transition mounted={!minimized} transition={"fade"}>
                 {(styles) => (
-                  <Stack
-                    className={"sunset-panel__content"}
-                    p={"md"}
-                    style={styles}
-                  >
-                    <SunsetPanelForm
-                      latLng={latLng}
-                      loading={loading}
-                      onSubmit={onSubmit}
-                    />
-
+                  <Stack className={"sunset-panel__content"} style={styles}>
                     {children}
                   </Stack>
                 )}
